@@ -1,9 +1,11 @@
+
 var squares= document.querySelectorAll('.square');
 var playerTurn= true;
 var winner=document.querySelector('.winner-hidden');
 var collectionOfArray=[];
 var collectionOfArrayVertical=[];
 var collectionOfArrayDiagonal=[];
+// var collectionOfArrayDiagonalReverse=[];
 
 function gameStartHorizontal(){
   for(var i = 0; i< 765;i++){
@@ -29,17 +31,39 @@ function gameStartHorizontal(){
           
   }};
 
-   function gameStartDiagonal(){
-     for(var i = 0 ; i < 100; i++){
-      var  winArray=[];
+   function gameStartDiagonal(num){
+     for(var i = num ; i < num + 20;  i ++){
+      var winArray=[];
       winArray[0]=i;
       winArray[1]=i+25;
       winArray[2]=i+25*2;
       winArray[3]=i+25*3;
       winArray[4]=i+25*4;
       collectionOfArrayDiagonal.push(winArray);
-      console.log(collectionOfArrayDiagonal)
      }};
+
+    //  function gameStartDiagonalReverse(num){
+    //   for(var i = num ; i > 4; i++){
+    //    var winArray=[];
+    //    winArray[0]=i;
+    //    winArray[1]=i+23;
+    //    winArray[2]=i+23*2;
+    //    winArray[3]=i+23*3;
+    //    winArray[4]=i+23*4;
+    //    collectionOfArrayDiagonalReverse.push(winArray);
+    //   }};
+
+     function runDiagonal(){
+       for(var i=0; i< 765; i=i+5){
+         gameStartDiagonal(i);
+        }
+      };
+
+      // function runDiagonalReverse(){
+      //   for (var i=24; i < 765 ; i++ ){
+      //     gameStartDiagonalReverse(i);
+      //    }
+      // }
 
   function winLogic(){
        for (var i= 0; i< 765; i++){
@@ -52,12 +76,18 @@ function gameStartHorizontal(){
             winner.classList.add('winner-show');
           } else if (squares[collectionOfArrayVertical[i][0]].textContent.includes('O')  && squares[collectionOfArrayVertical[i][1]].textContent.includes('O')  && squares[collectionOfArrayVertical[i][2]].textContent.includes('O')  && squares[collectionOfArrayVertical[i][3]].textContent.includes('O')  && squares[collectionOfArrayVertical[i][4]].textContent.includes('O')){
             winner.classList.add('winner-show');
-          }  
-         
-      }
+           } else if (squares[collectionOfArrayDiagonal[i][0]].textContent.includes('O')  && squares[collectionOfArrayDiagonal[i][1]].textContent.includes('O')  && squares[collectionOfArrayDiagonal[i][2]].textContent.includes('O')  && squares[collectionOfArrayDiagonal[i][3]].textContent.includes('O')  && squares[collectionOfArrayDiagonal[i][4]].textContent.includes('O')){
+            winner.classList.add('winner-show');
+          } else if (squares[collectionOfArrayDiagonal[i][0]].textContent.includes('X')  && squares[collectionOfArrayDiagonal[i][1]].textContent.includes('X')  && squares[collectionOfArrayDiagonal[i][2]].textContent.includes('X')  && squares[collectionOfArrayDiagonal[i][3]].textContent.includes('X')  && squares[collectionOfArrayDiagonal[i][4]].textContent.includes('X')){
+            winner.classList.add('winner-show');
+          }
+  //         } else if (squares[collectionOfArrayDiagonalReverse[i][0]].textContent.includes('O')  && squares[collectionOfArrayDiagonalReverse[i][1]].textContent.includes('O')  && squares[collectionOfArrayDiagonalReverse[i][2]].textContent.includes('O')  && squares[collectionOfArrayDiagonalReverse[i][3]].textContent.includes('O')  && squares[collectionOfArrayDiagonalReverse[i][4]].textContent.includes('O')){
+  //           winner.classList.add('winner-show');
+  //         } else if (squares[collectionOfArrayDiagonalReverse[i][0]].textContent.includes('X')  && squares[collectionOfArrayDiagonalReverse[i][1]].textContent.includes('X')  && squares[collectionOfArrayDiagonalReverse[i][2]].textContent.includes('X')  && squares[collectionOfArrayDiagonalReverse[i][3]].textContent.includes('X')  && squares[collectionOfArrayDiagonalReverse[i][4]].textContent.includes('X')){
+  //           winner.classList.add('winner-show');
+  // }
   }
-
-  
+}
 
 
 
@@ -83,15 +113,10 @@ function mark(){
                    break;
                 }}}))}
  
-gameStartDiagonal();
-mark();
+
+
+runDiagonal();
+// runDiagonalReverse();
 gameStartHorizontal();
 gameStartVertical();
-
-
-
-
-
-
-
- 
+mark();
